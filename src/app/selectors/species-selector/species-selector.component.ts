@@ -37,7 +37,6 @@ export class SpeciesSelectorComponent implements OnInit {
       tap(_ => this.loading = true),
       switchMap(filters => this.getSpeciesObservable(filters)
     )).subscribe(result => {
-      console.log(result.data);
       this.species = result.data && (result.data as any).species as Species[];
       this.loading = result.loading;
       this.errors  = result.errors;

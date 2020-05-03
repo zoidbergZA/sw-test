@@ -6,11 +6,11 @@ import { Apollo } from 'apollo-angular';
 import { CatalogFilterService, Filters } from 'src/app/providers/catalog-filter.service';
 
 @Component({
-  selector: 'character-selector',
-  templateUrl: './character-selector.component.html',
-  styleUrls: ['./character-selector.component.scss']
+  selector: 'characters-view',
+  templateUrl: './characters-view.component.html',
+  styleUrls: ['./characters-view.component.scss']
 })
-export class CharacterSelectorComponent implements OnInit {
+export class CharactersViewComponent implements OnInit {
   characters: Character[];
   loading = false;
   errors: any;
@@ -19,7 +19,8 @@ export class CharacterSelectorComponent implements OnInit {
     query Characters($filter: CharacterFilter) {
       characters(filter: $filter) {
         id,
-        name
+        name,
+        image
       }
     }
   `;
@@ -28,12 +29,6 @@ export class CharacterSelectorComponent implements OnInit {
 
   ngOnInit() {
     this.filterService.filters$.pipe(
-      tap(f => {
-        if (!f.movie || !f.species) {
-          this.characters = undefined;
-        }
-      }),
-      filter(f => f.movie !== undefined && f.species !== undefined),
       tap(_ => this.loading = true),
       switchMap(filters => this.getCharactersObservable(filters)
     )).subscribe(result => {
@@ -43,10 +38,6 @@ export class CharacterSelectorComponent implements OnInit {
     });
   }
 
-  onSelectionChange(event: any) {
-    this.filterService.setCharacterFilter(event.value);
-  }
-
   getCharactersObservable(filters: Filters) {
     return this.apollo
       .watchQuery({
@@ -54,7 +45,8 @@ export class CharacterSelectorComponent implements OnInit {
         variables: {
           filter: {
             films_some: filters.movie,
-            species_some: filters.species
+            species_some: filters.species,
+            id: filters.character
           }
         }
       }).valueChanges;

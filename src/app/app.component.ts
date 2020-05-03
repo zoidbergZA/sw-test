@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   selectedMovie: string | undefined;
-
-  onMovieSelected(movieId: string) {
-    console.log(`movie selected: ${movieId}`);
-    this.selectedMovie = movieId;
-  }
 }

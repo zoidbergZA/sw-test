@@ -1,0 +1,12 @@
+<div *ngIf="loading">
+  Loading...
+</div>
+<div *ngIf="errors">
+  Error :(
+</div>
+<div *ngIf="!loading && characters">
+  <div *ngFor="let item of characters">
+    <!-- <p>{{ item.name }} => {{ item.image }}</p> -->
+    <character-card [character]="item"></character-card>
+  </div>
+</div>

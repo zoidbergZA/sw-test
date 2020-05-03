@@ -10,13 +10,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieSelectorComponent } from './selectors/movie-selector/movie-selector.component';
 import { SpeciesSelectorComponent } from './selectors/species-selector/species-selector.component';
 import { CharacterSelectorComponent } from './selectors/character-selector/character-selector.component';
+import { CharactersViewComponent } from './characters-view/characters-view.component';
+import { CharacterCardComponent } from './character-card/character-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieSelectorComponent,
     SpeciesSelectorComponent,
-    CharacterSelectorComponent
+    CharacterSelectorComponent,
+    CharactersViewComponent,
+    CharacterCardComponent
   ],
   imports: [
     BrowserModule,

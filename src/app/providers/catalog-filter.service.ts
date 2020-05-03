@@ -27,6 +27,7 @@ export class CatalogFilterService {
 
   setSpeciesFilter(speciesId: string | undefined) {
     this.filterState.species = speciesId;
+    this.filterState.character = undefined;
 
     this.filters$.next(this.filterState);
   }
