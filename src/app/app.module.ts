@@ -4,13 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
-import { GraphQLModule } from './graphql.module';
+import { MaterialModule } from './modules/material.module';
+import { GraphQLModule } from './modules/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MovieSelectorComponent } from './selectors/movie-selector/movie-selector.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MovieSelectorComponent
   ],
   imports: [
     BrowserModule,

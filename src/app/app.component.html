@@ -1,14 +1,6 @@
-<mat-toolbar>hello</mat-toolbar>
-<mat-card>
-  <div *ngIf="loading">
-    Loading...
+<mat-toolbar>STAR WARS</mat-toolbar>
+<div class="selectors-bar">
+  <div class="selector">
+    <movie-selector (selected)="onMovieSelected($event)"></movie-selector>
   </div>
-  <div *ngIf="errors">
-    Error :(
-  </div>
-  <div *ngIf="films">
-    <div *ngFor="let film of films">
-      <p>{{ film.id }}: {{ film.title }}</p>
-    </div>
-  </div>
-</mat-card>
+</div>
