@@ -1,5 +1,5 @@
 import { ApolloError } from 'apollo-server';
-import { Film, Species, Character, CharacterFilter, SpeciesFilter } from './types';
+import { Film, Species, Character, CharacterFilter, SpeciesFilter } from '../../shared/types';
 import * as axios from 'axios';
 
 const swapiUrl = 'https://swapi.graph.cool/';

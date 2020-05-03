@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Film } from 'shared/types';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import gql from 'graphql-tag';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  films: any[];
+  films: Film[];
   loading = true;
   errors: any;
 
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
         `,
       })
       .valueChanges.subscribe(result => {
-        this.films = result.data && (result.data as any).films;
+        this.films = result.data && (result.data as any).films as Film[];
         this.loading = result.loading;
         this.errors = result.errors;
       });
