@@ -21,11 +21,16 @@
     "@angular/platform-browser": "~9.0.0",
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
-    "apollo-angular-boost": "^1.8.0",
+    "apollo-angular": "^1.9.1",
     "graphql": "^15.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "apollo-angular-link-http": "^1.10.0",
+    "apollo-link": "^1.2.11",
+    "apollo-client": "^2.6.0",
+    "apollo-cache-inmemory": "^1.6.0",
+    "graphql-tag": "^2.10.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.1",
@@ -35,6 +40,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "apollo": "^2.27.3",
     "apollo-codegen": "^0.20.2",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",

@@ -1,2 +1,14 @@
 <mat-toolbar>hello</mat-toolbar>
-<mat-card></mat-card>
+<mat-card>
+  <div *ngIf="loading">
+    Loading...
+  </div>
+  <div *ngIf="errors">
+    Error :(
+  </div>
+  <div *ngIf="films">
+    <div *ngFor="let film of films">
+      <p>{{ film.id }}: {{ film.title }}</p>
+    </div>
+  </div>
+</mat-card>
