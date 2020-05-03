@@ -1,7 +1,10 @@
-<div *ngIf="character">
-  <mat-card>
-    <mat-card-content>
+<div *ngIf="character" class="card-holder">
+  <mat-card class="content">
+    <mat-card-title>
       {{ character.name }}
+    </mat-card-title>
+    <mat-card-content>
+      <img [src]="character.image" alt="portrait">
     </mat-card-content>
   </mat-card>
 </div>

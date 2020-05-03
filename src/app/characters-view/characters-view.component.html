@@ -4,7 +4,7 @@
 <div *ngIf="errors">
   Error :(
 </div>
-<div *ngIf="!loading && characters">
+<div *ngIf="!loading && characters" class="container">
   <div *ngFor="let item of characters">
     <!-- <p>{{ item.name }} => {{ item.image }}</p> -->
     <character-card [character]="item"></character-card>
