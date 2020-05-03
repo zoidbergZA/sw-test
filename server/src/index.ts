@@ -11,6 +11,7 @@ const typeDefs = gql`
   type Species {
     id: ID!
     name: String!
+    films: [Film]!
   }
 
   type Character {
@@ -21,6 +22,10 @@ const typeDefs = gql`
     image: String
   }
 
+  input SpeciesFilter {
+    films_some: String
+  }
+
   input CharacterFilter {
     id: String
     films_some: String
@@ -29,7 +34,7 @@ const typeDefs = gql`
 
   type Query {
     films: [Film]
-    species: [Species]
+    species(filter: SpeciesFilter): [Species]
     characters(filter: CharacterFilter): [Character]
   }
 `;

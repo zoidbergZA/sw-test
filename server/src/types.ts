@@ -5,7 +5,12 @@ export interface Film {
 
 export interface Species {
   id: string,
-  name: string
+  name: string,
+  films: Film[]
+}
+
+export interface SpeciesFilter {
+  films_some?: string
 }
 
 export interface Character {

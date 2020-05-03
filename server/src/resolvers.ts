@@ -1,8 +1,9 @@
 import { ApolloError } from 'apollo-server';
-import { Film, Species, Character, CharacterFilter } from './types';
+import { Film, Species, Character, CharacterFilter, SpeciesFilter } from './types';
 import * as axios from 'axios';
 
 const swapiUrl = 'https://swapi.graph.cool/';
+const characterImgCache = new Map<string, string>();
 
 export const resolvers = {
   Query: {
@@ -22,18 +23,24 @@ export const resolvers = {
         throw new ApolloError(error);
       }
     },
-    async species() {
+    async species(_: null, args: any) {
       try {
         const query = `query {
           allSpecies {
             id,
-            name
+            name,
+            films {
+              id,
+              title
+            }
           }
         }`;
 
-        const data = await sendSwapiQuery(query);
+        const data        = await sendSwapiQuery(query);
+        const allSpecies  = data.allSpecies.map((s: any) => s as Species);
+        const filter      = args.filter as SpeciesFilter;
 
-        return data.allSpecies.map((s: any) => s as Species);
+        return filterSpecies(allSpecies, filter);
       } catch (error) {
         throw new ApolloError(error);
       }
@@ -78,6 +85,20 @@ async function sendSwapiQuery(query: string): Promise<any> {
   return response.data.data;
 }
 
+function filterSpecies(species: Species[], filter?: SpeciesFilter): Species[] {
+  if (!filter) {
+    return species;
+  }
+
+  let matches = species;
+
+  if (filter.films_some) {
+    matches = matches.filter(s => s.films.some(f => f.id === filter.films_some));
+  }
+
+  return matches;
+}
+
 function filterCharacters(characters: Character[], filter?: CharacterFilter): Character[] {
   if (!filter) {
     return characters;
@@ -103,7 +124,22 @@ function filterCharacters(characters: Character[], filter?: CharacterFilter): Ch
 async function assignCharacterImage(character: Character): Promise<Character> {
   // TODO: call image search API with character name
 
-  character.image = `https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png`;
+  if (characterImgCache.has(character.id)) {
+    character.image = characterImgCache.get(character.id);
+    return character;
+  }
 
-  return character;
+  try {
+    const response = await axios.default.get('https://dog.ceo/api/breeds/image/random');
+    const img = response.data.message;
+
+    characterImgCache.set(character.id, img);
+    character.image = img;
+
+    return character;
+
+  } catch (error) {
+    console.log(error);
+    return character;
+  }
 }
