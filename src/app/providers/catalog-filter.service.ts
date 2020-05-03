@@ -19,6 +19,8 @@ export class CatalogFilterService {
 
   setMovieFilter(movieId: string | undefined) {
     this.filterState.movie = movieId;
+    this.filterState.species = undefined;
+    this.filterState.character = undefined;
 
     this.filters$.next(this.filterState);
   }
