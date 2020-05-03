@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-content>
+    <h4>Species</h4>
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="errors">
+      Error :(
+    </div>
+    <div *ngIf="!loading">
+      <mat-form-field>
+        <mat-select [disabled]="!characters" (selectionChange)="onSelectionChange($event)" placeholder="select a character">
+          <mat-option *ngFor="let item of characters" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+</mat-card>

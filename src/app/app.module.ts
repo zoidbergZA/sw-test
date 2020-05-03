@@ -9,12 +9,14 @@ import { GraphQLModule } from './modules/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieSelectorComponent } from './selectors/movie-selector/movie-selector.component';
 import { SpeciesSelectorComponent } from './selectors/species-selector/species-selector.component';
+import { CharacterSelectorComponent } from './selectors/character-selector/character-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieSelectorComponent,
-    SpeciesSelectorComponent
+    SpeciesSelectorComponent,
+    CharacterSelectorComponent
   ],
   imports: [
     BrowserModule,

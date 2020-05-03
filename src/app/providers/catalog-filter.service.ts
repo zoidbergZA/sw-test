@@ -28,4 +28,10 @@ export class CatalogFilterService {
 
     this.filters$.next(this.filterState);
   }
+
+  setCharacterFilter(characterId: string | undefined) {
+    this.filterState.character = characterId;
+
+    this.filters$.next(this.filterState);
+  }
 }
