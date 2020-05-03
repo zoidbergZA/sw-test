@@ -8,11 +8,13 @@ import { MaterialModule } from './modules/material.module';
 import { GraphQLModule } from './modules/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieSelectorComponent } from './selectors/movie-selector/movie-selector.component';
+import { SpeciesSelectorComponent } from './selectors/species-selector/species-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieSelectorComponent
+    MovieSelectorComponent,
+    SpeciesSelectorComponent
   ],
   imports: [
     BrowserModule,

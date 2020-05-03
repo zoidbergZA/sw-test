@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  selectedMovie: string | undefined;
+
   onMovieSelected(movieId: string) {
     console.log(`movie selected: ${movieId}`);
+    this.selectedMovie = movieId;
   }
 }

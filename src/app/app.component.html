@@ -3,4 +3,7 @@
   <div class="selector">
     <movie-selector (selected)="onMovieSelected($event)"></movie-selector>
   </div>
+  <div class="selector">
+    <species-selector class="selector" [movieFilter]="selectedMovie"></species-selector>
+  </div>
 </div>
