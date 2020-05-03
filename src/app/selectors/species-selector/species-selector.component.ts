@@ -3,7 +3,7 @@ import { switchMap, filter, tap } from 'rxjs/operators';
 import gql from 'graphql-tag';
 import { Species } from 'shared/types';
 import { Apollo } from 'apollo-angular';
-import { CatalogFilterService } from 'src/app/providers/catalog-filter.service';
+import { CatalogFilterService, Filters } from 'src/app/providers/catalog-filter.service';
 
 @Component({
   selector: 'species-selector',
@@ -35,16 +35,8 @@ export class SpeciesSelectorComponent implements OnInit {
       }),
       filter(f => f.movie !== undefined),
       tap(_ => this.loading = true),
-      switchMap(filters => this.apollo
-        .watchQuery({
-          query: this.query,
-          variables: {
-            filter: {
-              films_some: filters.movie
-            }
-          }
-        }).valueChanges)
-    ).subscribe(result => {
+      switchMap(filters => this.getSpeciesObservable(filters)
+    )).subscribe(result => {
       console.log(result.data);
       this.species = result.data && (result.data as any).species as Species[];
       this.loading = result.loading;
@@ -54,5 +46,17 @@ export class SpeciesSelectorComponent implements OnInit {
 
   onSelectionChange(event: any) {
     this.filterService.setSpeciesFilter(event.value);
+  }
+
+  getSpeciesObservable(filters: Filters) {
+    return this.apollo
+      .watchQuery({
+        query: this.query,
+        variables: {
+          filter: {
+            films_some: filters.movie
+          }
+        }
+      }).valueChanges;
   }
 }
