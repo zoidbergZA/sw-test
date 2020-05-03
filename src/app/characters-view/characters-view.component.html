@@ -6,7 +6,9 @@
 </div>
 <div *ngIf="!loading && characters" class="container">
   <div *ngFor="let item of characters">
-    <!-- <p>{{ item.name }} => {{ item.image }}</p> -->
     <character-card [character]="item"></character-card>
   </div>
+</div>
+<div *ngIf="!loading && !characters" class="container">
+  <p>select a movie to get started</p>
 </div>

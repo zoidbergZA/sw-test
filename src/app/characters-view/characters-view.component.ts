@@ -29,6 +29,7 @@ export class CharactersViewComponent implements OnInit {
 
   ngOnInit() {
     this.filterService.filters$.pipe(
+      filter(f => f.movie !== undefined),
       tap(_ => this.loading = true),
       switchMap(filters => this.getCharactersObservable(filters)
     )).subscribe(result => {
