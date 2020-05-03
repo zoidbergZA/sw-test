@@ -7,7 +7,7 @@
     <div *ngIf="errors">
       Error :(
     </div>
-    <div>
+    <div *ngIf="!loading">
       <mat-form-field>
         <mat-select [disabled]="!species" (selectionChange)="onSelectionChange($event)" placeholder="select a species">
           <mat-option *ngFor="let item of species" [value]="item.id">

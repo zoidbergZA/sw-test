@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Film } from 'shared/types';
+import { CatalogFilterService } from 'src/app/providers/catalog-filter.service';
 
 @Component({
   selector: 'movie-selector',
@@ -9,15 +10,11 @@ import { Film } from 'shared/types';
   styleUrls: ['./movie-selector.component.scss']
 })
 export class MovieSelectorComponent implements OnInit {
-
-  @Output()
-  selected: EventEmitter<string> = new EventEmitter<string>();
-
   films: Film[];
   loading = true;
   errors: any;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private filterService: CatalogFilterService) {}
 
   ngOnInit() {
     this.apollo
@@ -39,6 +36,6 @@ export class MovieSelectorComponent implements OnInit {
   }
 
   onSelectionChange(event: any) {
-    this.selected.emit(event.value);
+    this.filterService.setMovieFilter(event.value);
   }
 }

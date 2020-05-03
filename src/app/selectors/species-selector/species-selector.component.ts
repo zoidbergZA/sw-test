@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { switchMap, filter, tap } from 'rxjs/operators';
 import gql from 'graphql-tag';
 import { Species } from 'shared/types';
 import { Apollo } from 'apollo-angular';
+import { CatalogFilterService } from 'src/app/providers/catalog-filter.service';
 
 @Component({
   selector: 'species-selector',
@@ -9,50 +11,48 @@ import { Apollo } from 'apollo-angular';
   styleUrls: ['./species-selector.component.scss']
 })
 export class SpeciesSelectorComponent implements OnInit {
-
-  // tslint:disable-next-line: variable-name
-  private _movieFilter: string | undefined;
-
-  get movieFilter() {
-    return this._movieFilter;
-  }
-
-  @Input()
-  set movieFilter(val: string | undefined) {
-    this._movieFilter = val;
-
-    console.log(`handle movie filter changed: ${this.movieFilter}`);
-  }
-
-  @Output()
-  selected: EventEmitter<string> = new EventEmitter<string>();
-
   species: Species[];
-  loading = true;
+  loading = false;
   errors: any;
 
-  constructor(private apollo: Apollo) {}
+  query = gql`
+    query Species($filter: SpeciesFilter) {
+      species(filter: $filter) {
+        id,
+        name
+      }
+    }
+  `;
+
+  constructor(private apollo: Apollo, private filterService: CatalogFilterService) {}
 
   ngOnInit() {
-    this.apollo
-      .watchQuery({
-        query: gql`
-          {
-            films {
-              id,
-              title
+    this.filterService.filters$.pipe(
+      tap(f => {
+        if (!f.movie) {
+          this.species = undefined;
+        }
+      }),
+      filter(f => f.movie !== undefined),
+      tap(_ => this.loading = true),
+      switchMap(filters => this.apollo
+        .watchQuery({
+          query: this.query,
+          variables: {
+            filter: {
+              films_some: filters.movie
             }
           }
-        `,
-      })
-      .valueChanges.subscribe(result => {
-        this.species = result.data && (result.data as any).species as Species[];
-        this.loading = result.loading;
-        this.errors = result.errors;
-      });
+        }).valueChanges)
+    ).subscribe(result => {
+      console.log(result.data);
+      this.species = result.data && (result.data as any).species as Species[];
+      this.loading = result.loading;
+      this.errors  = result.errors;
+    });
   }
 
   onSelectionChange(event: any) {
-    this.selected.emit(event.value);
+    this.filterService.setSpeciesFilter(event.value);
   }
 }
