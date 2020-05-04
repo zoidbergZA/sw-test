@@ -1,6 +1,7 @@
 import { ApolloError } from 'apollo-server';
 import { Film, Species, Character, CharacterFilter, SpeciesFilter } from '../../shared/types';
 import * as axios from 'axios';
+const gis = require('g-i-s');
 
 const swapiUrl = 'https://swapi.graph.cool/';
 const characterImgCache = new Map<string, string>();
@@ -122,24 +123,43 @@ function filterCharacters(characters: Character[], filter?: CharacterFilter): Ch
 }
 
 async function assignCharacterImage(character: Character): Promise<Character> {
-  // TODO: call image search API with character name
-
   if (characterImgCache.has(character.id)) {
     character.image = characterImgCache.get(character.id);
     return character;
   }
 
-  try {
-    const response = await axios.default.get('https://dog.ceo/api/breeds/image/random');
-    const img = response.data.message;
+  return new Promise<Character>((resolve, reject) => {
+    gis(`start wars character ${character.name}`, (error: any, results: any) => {
+      if (error) {
+        console.log(error);
+      }
+      else {
+        // console.log(JSON.stringify(results, null, '  '));
+        const img = results[0].url;
+        character.image = img;
+        characterImgCache.set(character.id, img);
+      }
+      resolve(character);
+    });
+  })
 
-    characterImgCache.set(character.id, img);
-    character.image = img;
+  // // TODO: call image search API with character name
+  // if (characterImgCache.has(character.id)) {
+  //   character.image = characterImgCache.get(character.id);
+  //   return character;
+  // }
 
-    return character;
+  // try {
+  //   const response = await axios.default.get('https://dog.ceo/api/breeds/image/random');
+  //   const img = response.data.message;
 
-  } catch (error) {
-    console.log(error);
-    return character;
-  }
+  //   characterImgCache.set(character.id, img);
+  //   character.image = img;
+
+  //   return character;
+
+  // } catch (error) {
+  //   console.log(error);
+  //   return character;
+  // }
 }
