@@ -1,8 +1,8 @@
 <mat-card>
-  <mat-card-content>
+  <mat-card-content class="selector-content">
     <h4>Species</h4>
     <div *ngIf="loading">
-      Loading...
+      <mat-spinner diameter=42></mat-spinner>
     </div>
     <div *ngIf="errors">
       Error :(
