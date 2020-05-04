@@ -16,9 +16,18 @@ export interface SpeciesFilter {
 export interface Character {
   id: string;
   name: string;
-  image?: string;
+  birthYear: string;
+  mass: number;
+  height: number;
   films: Film[];
   species: Species[];
+  homeworld: Planet;
+  image?: string;
+}
+
+export interface Planet {
+  id: string;
+  name: string;
 }
 
 export interface CharacterFilter {

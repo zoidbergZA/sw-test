@@ -52,6 +52,13 @@ export const resolvers = {
           allPersons {
             id,
             name,
+            birthYear,
+            height,
+            mass,
+            homeworld {
+              id,
+              name
+            }
             films {
               id,
               title
@@ -134,32 +141,11 @@ async function assignCharacterImage(character: Character): Promise<Character> {
         console.log(error);
       }
       else {
-        // console.log(JSON.stringify(results, null, '  '));
         const img = results[0].url;
         character.image = img;
         characterImgCache.set(character.id, img);
       }
       resolve(character);
     });
-  })
-
-  // // TODO: call image search API with character name
-  // if (characterImgCache.has(character.id)) {
-  //   character.image = characterImgCache.get(character.id);
-  //   return character;
-  // }
-
-  // try {
-  //   const response = await axios.default.get('https://dog.ceo/api/breeds/image/random');
-  //   const img = response.data.message;
-
-  //   characterImgCache.set(character.id, img);
-  //   character.image = img;
-
-  //   return character;
-
-  // } catch (error) {
-  //   console.log(error);
-  //   return character;
-  // }
+  });
 }
