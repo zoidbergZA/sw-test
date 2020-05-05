@@ -18,6 +18,9 @@ export class CharacterDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.character);
+  }
+
+  closeClick() {
+    this.dialogRef.close();
   }
 }

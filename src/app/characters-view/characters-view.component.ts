@@ -22,6 +22,9 @@ export class CharactersViewComponent implements OnInit {
         name,
         image,
         birthYear,
+        species {
+          name
+        }
         films {
           id,
           title

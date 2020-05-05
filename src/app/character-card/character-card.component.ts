@@ -19,7 +19,8 @@ export class CharacterCardComponent implements OnInit {
 
   onSelect() {
     this.dialog.open(CharacterDetailsComponent, {
-      data: { character: this.character }
+      data: { character: this.character },
+      autoFocus: false
     });
   }
 }

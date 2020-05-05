@@ -1,1 +1,31 @@
-<p>character-details works!</p>
+<div class="container">
+  <h3>{{ character.name }}</h3>
+  <div class="details-box">
+    <img [src]="character.image" alt="portrait">
+      <table class="info-table">
+        <tr *ngIf="character.species[0] as species">
+          <td class="table-key">species:</td>
+          <td class="table-value">{{ species.name }}</td>
+        </tr>
+        <tr *ngIf="character.homeworld">
+          <td class="table-key">homeworld:</td>
+          <td class="table-value">{{ character.homeworld.name }}</td>
+        </tr>
+        <tr *ngIf="character.birthYear">
+          <td class="table-key">birth year:</td>
+          <td class="table-value">{{ character.birthYear }}</td>
+        </tr>
+        <tr *ngIf="character.height">
+          <td class="table-key">height:</td>
+          <td class="table-value">{{ character.height }} cm</td>
+        </tr>
+        <tr *ngIf="character.mass">
+          <td class="table-key">mass:</td>
+          <td>{{ character.mass }} kg</td>
+        </tr>
+      </table>
+  </div>
+</div>
+<mat-dialog-actions>
+  <button mat-button (click)="closeClick()">close</button>
+</mat-dialog-actions>

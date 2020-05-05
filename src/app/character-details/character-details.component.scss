@@ -1,0 +1,27 @@
+img {
+  max-width: 230px;
+  max-height: 280px;
+}
+.container {
+  width: 550px;
+  max-width: 95%;
+}
+.details-box {
+  display: flex;
+  flex-direction: row;
+}
+.info-table {
+ margin-left: 20px;
+ margin-right: 20px;
+}
+.table-key {
+  width: 120px;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+.table-value {
+  padding-bottom: 15px;
+}
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
