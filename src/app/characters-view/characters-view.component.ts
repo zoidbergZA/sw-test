@@ -11,7 +11,7 @@ import { CatalogFilterService, Filters } from 'src/app/providers/catalog-filter.
   styleUrls: ['./characters-view.component.scss']
 })
 export class CharactersViewComponent implements OnInit {
-  characters: Character[];
+  characters: Character[] | undefined;
   loading = false;
   errors: any;
 
