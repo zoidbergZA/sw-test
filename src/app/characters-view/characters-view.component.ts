@@ -20,7 +20,18 @@ export class CharactersViewComponent implements OnInit {
       characters(filter: $filter) {
         id,
         name,
-        image
+        image,
+        birthYear,
+        films {
+          id,
+          title
+        },
+        mass,
+        height,
+        homeworld {
+          id,
+          name
+        }
       }
     }
   `;

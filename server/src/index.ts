@@ -17,12 +17,12 @@ const typeDefs = gql`
   type Character {
     id: ID!
     name: String!
-    birthYear: String!
+    birthYear: String
     films: [Film]!
     species: [Species]!
-    mass: Float!
-    height: Int!
-    homeworld: Planet!
+    mass: Float
+    height: Int
+    homeworld: Planet
     image: String
   }
 

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content class="selector-content">
-    <h4>Character</h4>
+    <p class="selector-title" [ngClass]="{'inactive': !characters}">Character</p>
     <div *ngIf="loading">
       <mat-spinner diameter=42></mat-spinner>
     </div>

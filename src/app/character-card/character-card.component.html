@@ -1,4 +1,4 @@
-<div *ngIf="character" class="card-holder">
+<div *ngIf="character" class="card-holder" (click)="onSelect()">
   <mat-card class="content">
     <mat-card-title>
       {{ character.name }}

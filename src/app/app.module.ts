@@ -12,6 +12,7 @@ import { SpeciesSelectorComponent } from './selectors/species-selector/species-s
 import { CharacterSelectorComponent } from './selectors/character-selector/character-selector.component';
 import { CharactersViewComponent } from './characters-view/characters-view.component';
 import { CharacterCardComponent } from './character-card/character-card.component';
+import { CharacterDetailsComponent } from './character-details/character-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CharacterCardComponent } from './character-card/character-card.componen
     SpeciesSelectorComponent,
     CharacterSelectorComponent,
     CharactersViewComponent,
-    CharacterCardComponent
+    CharacterCardComponent,
+    CharacterDetailsComponent
   ],
   imports: [
     BrowserModule,

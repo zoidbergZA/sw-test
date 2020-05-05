@@ -1,11 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html
+body {
+  height: 100%;
+  background-image: url("assets/background.jpg");
+  background-repeat: repeat;
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: black;
   color: whitesmoke;
+}
+
+.center {
+  text-align: center;
+}
+
+.selector-title {
+  font-size: 1.15em;
+  font-weight: 500;
+}
+
+.inactive {
+  color: grey;
 }
 
 .selector-content {

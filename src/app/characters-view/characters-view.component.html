@@ -1,5 +1,5 @@
-<div *ngIf="loading">
-  Loading...
+<div *ngIf="loading" class="busy-spinner">
+  <mat-spinner diameter=128></mat-spinner>
 </div>
 <div *ngIf="errors">
   Error :(
@@ -9,6 +9,7 @@
     <character-card [character]="item"></character-card>
   </div>
 </div>
-<div *ngIf="!loading && !characters" class="container">
-  <p>select a movie to get started</p>
+<div *ngIf="!loading && !characters">
+  <img src="assets/starwars-sensorfact.png">
+  <p class="center">select a movie to get started</p>
 </div>
