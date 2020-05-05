@@ -1,10 +1,10 @@
 import { ApolloError } from 'apollo-server';
 import { Film, Species, Character, CharacterFilter, SpeciesFilter } from '../../shared/types';
 import * as axios from 'axios';
-const gis = require('g-i-s');
 
+const gis = require('g-i-s');
 const swapiUrl = 'https://swapi.graph.cool/';
-const characterImgCache = new Map<string, string>();
+const characterImageCache = new Map<string, string>();
 
 export const resolvers = {
   Query: {
@@ -130,20 +130,20 @@ function filterCharacters(characters: Character[], filter?: CharacterFilter): Ch
 }
 
 async function assignCharacterImage(character: Character): Promise<Character> {
-  if (characterImgCache.has(character.id)) {
-    character.image = characterImgCache.get(character.id);
+  if (characterImageCache.has(character.id)) {
+    character.image = characterImageCache.get(character.id);
     return character;
   }
 
   return new Promise<Character>((resolve, reject) => {
-    gis(`start wars character ${character.name}`, (error: any, results: any) => {
+    gis(`star wars character ${character.name}`, (error: any, results: any) => {
       if (error) {
         console.log(error);
       }
       else {
         const img = results[0].url;
         character.image = img;
-        characterImgCache.set(character.id, img);
+        characterImageCache.set(character.id, img);
       }
       resolve(character);
     });
