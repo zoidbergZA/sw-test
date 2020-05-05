@@ -1,15 +1,20 @@
-<div *ngIf="loading" class="busy-spinner">
-  <mat-spinner diameter=128></mat-spinner>
-</div>
-<div *ngIf="errors">
-  Error :(
-</div>
-<div *ngIf="!loading && characters" class="container">
-  <div *ngFor="let item of characters">
-    <character-card [character]="item"></character-card>
+<div class="content">
+  <div *ngIf="loading" class="busy-spinner">
+    <mat-spinner diameter=128></mat-spinner>
   </div>
-</div>
-<div *ngIf="!loading && !characters">
-  <img src="assets/starwars-sensorfact.png">
-  <p class="center">select a movie to get started</p>
+  <div *ngIf="errors">
+    Error :(
+  </div>
+  <div *ngIf="!loading && characters">
+    <h2 class="center">CHARACTERS</h2>
+    <div class="container">
+      <div *ngFor="let item of characters">
+        <character-card [character]="item"></character-card>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loading && !characters">
+    <img src="assets/starwars-sensorfact.png">
+    <p class="center">select a movie to get started</p>
+  </div>
 </div>
